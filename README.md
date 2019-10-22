@@ -5,7 +5,8 @@ This tasks requires you to refactor the existing code such that it follows certa
 
 ## Instructions for Setup
 
-1. Clone the app
+1. Clone the repo and switch to `design_patterns` branch.
+2. Create your own branch with your name from `design_patterns` branch.
 2. Run `bundle install` and run migrations to generate schema
 3. Run `bundle exec figaro install` to generate `application.yml` configuration file.
 4. Setup your own stripe account and add the secret key and publishable key to `config/application.yml`
@@ -21,7 +22,7 @@ development:
 
 ## App Description
 
-The app is small e-commerce store which has prducts and orders. The listed products then can be purchased using credit card for which Stripe is used.
+The app is small e-commerce store which has products and orders. The listed products then can be purchased using credit card for which Stripe is used.
 
 
 
