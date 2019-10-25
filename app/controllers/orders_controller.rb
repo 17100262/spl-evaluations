@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
 	end
 	
 	def create_session
-		@order = @product.orders.new(status: 'session_initiated', paid: false, user_id: current_user.id)
+		@order = OrderGenerator.generate_order(current_user, @product)
 		respond_to do |f|
 			if @order.save
 				@stripe_adapter = StripeAdapter.new(@product, @order)

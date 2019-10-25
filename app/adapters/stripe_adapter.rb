@@ -11,6 +11,8 @@ class StripeAdapter
       client_reference_id: @order.id,
       line_items: [{
         name: @product.name,
+        # description: 'Comfortable cotton t-shirt',
+        # images: ['https://example.com/t-shirt.png'],
         amount: (@product.price * 100).to_i,
         currency: 'usd',
         quantity: 1,
