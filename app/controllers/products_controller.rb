@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
@@ -6,10 +7,9 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
-
     if params[:checkout] == 'failure'
       flash[:notice] = 'Payment unsuccessful'
-  end
+    end
   end
 
   # GET /products/1
@@ -30,7 +30,6 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -76,4 +75,5 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:name, :price)
     end
-end
+
+  end
