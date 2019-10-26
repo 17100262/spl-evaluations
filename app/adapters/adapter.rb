@@ -16,7 +16,7 @@ module Adapter
               quantity: 1,
           }],
           success_url: orders_url({checkout: 'success'}),
-          cancel_url: products_url({checkout: 'failure'}),
+          cancel_url: products_url({checkout: 'failure'})
       )
     end
   end

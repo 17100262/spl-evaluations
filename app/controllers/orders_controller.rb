@@ -16,7 +16,11 @@ class OrdersController < ApplicationController
       product = Product.find(params[:id])
       respond_to do |f|
         @session = UserOrderSession.new(product, current_user).call
-        f.js {}
+        unless @session.nil?
+          f.js {}
+        else
+          f.html { redirect_to request.referrer, :notice => "For some reason your session failed to initiate. Sorry for Inconvenience!" }
+        end
       end
     end
 
