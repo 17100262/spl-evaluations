@@ -13,17 +13,11 @@ class OrdersController < ApplicationController
     end
 
     def create_session
-        @product = Product.find(params[:id])
-        @order = @product.orders.new(status: 'session_initiated',paid: false,user_id: current_user.id)
-        respond_to do |f|
-            if @order.save
-                @session = Adapter::StripeWrapper.new(@order,@product).get_stripe_session
-                f.js {}
-            else
-                f.js {}
-            end
-        end
-
+      product = Product.find(params[:id])
+      respond_to do |f|
+        @session = UserOrderSession.new(product, current_user).call
+        f.js {}
+      end
     end
 
     def stripe_webhook
