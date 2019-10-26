@@ -11,32 +11,19 @@ class OrdersController < ApplicationController
             flash[:notice] = 'Payment is Successful'
         end
     end
-    
+
     def create_session
         @product = Product.find(params[:id])
         @order = @product.orders.new(status: 'session_initiated',paid: false,user_id: current_user.id)
         respond_to do |f|
             if @order.save
-                @session = Stripe::Checkout::Session.create(
-                    payment_method_types: ['card'],
-                    client_reference_id: @order.id,
-                    line_items: [{
-                        name: @product.name,
-                        # description: 'Comfortable cotton t-shirt',
-                        # images: ['https://example.com/t-shirt.png'],
-                        amount: (@product.price * 100).to_i,
-                        currency: 'usd',
-                        quantity: 1,
-                    }],
-                    success_url: orders_url({checkout: 'success'}),
-                    cancel_url: products_url({checkout: 'failure'}),
-                )
+                @session = Adapter::StripeWrapper.new(@order,@product).get_stripe_session
                 f.js {}
             else
                 f.js {}
             end
         end
-            
+
     end
 
     def stripe_webhook
