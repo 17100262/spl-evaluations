@@ -1,0 +1,30 @@
+<p id="notice"><%= notice || flash[:notice] %></p>
+
+<h1>Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Paid</th>
+      <!-- <th>Stripe Session</th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.product.name %></td>
+        <td><%= order.product.price %></td>
+        <td><%= order.status %></td>
+        <td><%= order.paid %></td>
+        <!-- <td><%#= order.stripe_charge_id%></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

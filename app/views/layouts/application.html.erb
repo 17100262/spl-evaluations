@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Design</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://js.stripe.com/v3/"></script>
+
+  </head>
+
+  <body>
+    <% if user_signed_in? %>
+    <%= link_to 'Sign Out',destroy_user_session_path,method: :delete %>
+    <%= link_to 'Products',products_path %>
+    <%= link_to 'Orders',orders_path %>
+    <%= link_to 'Profile',profile_path %>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
