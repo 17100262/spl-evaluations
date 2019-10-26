@@ -8,7 +8,7 @@ class UserOrderSession
   def call
     @order = @product.orders.new(status: 'session_initiated',paid: false,user_id: @user.id)
     if @order.save!
-      Adapter::StripeWrapper.new(@order,@product).get_stripe_session
+      Adapter::StripeWrapper.new(@order,@product).session
     end
   end
 end

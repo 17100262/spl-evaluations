@@ -1,7 +1,7 @@
 module Adapter
   class StripeWrapper
     include Rails.application.routes.url_helpers
-    attr_accessor :order, :product
+    attr_accessor :order, :product, :session
 
     def initialize(order, product)
       @session = Stripe::Checkout::Session.create(
@@ -19,10 +19,5 @@ module Adapter
           cancel_url: products_url({checkout: 'failure'}),
       )
     end
-
-    def get_stripe_session
-      @session
-    end
-
   end
 end
