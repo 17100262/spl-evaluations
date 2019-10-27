@@ -130,13 +130,13 @@ class Block
   # =============
   # = Operators =
   # =============
-  
+
   # Return the result of adding the other Block (or Blocks) to self.
 
   def add (other)
     # Implement.
   end
-  
+
   # Return the result of subtracting the other Block (or Blocks) from self.
 
   def subtract (other)
@@ -160,6 +160,8 @@ class Block
   end
 
   def merge (others)
-    # Implement.
+    if others[1].overlaps?(others[2]) && intersects_top?(others[0])
+      [self,others[1],others.last]
+    end
   end
 end
